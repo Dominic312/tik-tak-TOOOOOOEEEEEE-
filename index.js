@@ -54,5 +54,30 @@ const game_func = () =>{
     check_board_complete();
 }
 
-render_board();
 
+
+const check_line = (posA ,posB ,posC) => {
+    if(play_board[posA] !==""){
+
+    return ( play_board[posA] === play_board[posB] && 
+        play_board[posB] === play_board[posC])
+    }
+    return false;
+}
+
+const winner_statement = document.getElementById("winner");
+
+const check_for_winner = () => {
+    let result = check_match();
+
+    if (result === player) {
+        winner_statement.innerText = "player Win!!!"
+        winner_statement.classList.add("playerWin");
+    }
+};
+
+const check_match = () => {
+
+}
+
+render_board();
