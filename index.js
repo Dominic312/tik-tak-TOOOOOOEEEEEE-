@@ -52,6 +52,7 @@ const check_board_complete = function() {
 const game_func = () =>{
     render_board();
     check_board_complete();
+    check_for_winner();
 }
 
 
@@ -73,11 +74,53 @@ const check_for_winner = () => {
     if (result === player) {
         winner_statement.innerText = "player Win!!!"
         winner_statement.classList.add("playerWin");
+        board_full = true
+    }
+    else if (result === computer){
+        winner_statement.innerText = "computer Win :("
+        winner_statement.classList.add("computerWin");
+        board_full = true
+    }
+    else if (board_full){
+        winner_statement.innerText = "Draw!!!";
+        winner_statement.classList.list.add("draw");
     }
 };
 
 const check_match = () => {
+    for(let index =0; index < play_board.length; index +=3){
+        //how do we check the cerent rowwww??????????????????
+        if(check_line(index, index + 1, index + 2)){
+            return play_board[index];
+        }
+    }
+    for(let index =0; index < 3; index++){
+        //how do we check the cerent rowwww??????????????????
+        if(check_line(index, index + 3, index + 6)){
+            return play_board[index];
+        }
+        
+    }
+   if (check_line(0, 4, 8)){
+       return play_board[0];
+   }
+   
+   if (check_line(2, 4, 6)){
+    return play_board[2];
+}
+return false;
+};
 
+
+
+
+const reset_board = () => {
+    play_board = ["", "", "", "", "", "", "", "",""];
+    board_full = false;
+
+  winner_statement.innerText = "";
+  winner_statement.classList.remove("playerWin", "computer", "draw")
+  render_board();
 }
 
 render_board();
